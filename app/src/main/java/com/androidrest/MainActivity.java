@@ -28,12 +28,35 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
+        //start a call
+        RestTask<String> rt = exampleGet();
+
+        rt.setOnSuccess(new OnSuccess<String>() {
+            @Override
+            public void success(String o, String response) {
+                //success happens on http status 200 and no exception in executeInBackground
+                Log.i("testResponse","response "+  response);
+            }
+        });
+        rt.setOnFailure(new OnFailure() {
+            @Override
+            public void onFinish(RestConnection sc, Exception e, String exceptionError, String response) {
+
+            }
+        });
+        rt.setOnFinishTask(new OnFinishTask2<String>() {
+            @Override
+            public void onFinish(RestConnection sc, Exception e, String exceptionError, String o, String response) {
+
+            }
+        });
+        rt.execute();
     }
 
     @Override
@@ -52,12 +75,12 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    void exampleGet() {
-        RestTask<String> rt = new RestTask<String>(this) {
+    RestTask exampleGet() {
+        return new RestTask<String>(MainActivity.this) {
             @Override
             public void executeInBackGround(Context context) throws IllegalArgumentException, IOException, URISyntaxException, JSONException {
                 //set the rest connection
-                this.sc = MainActivity.this.initConnection();
+                this.sc = MainActivity.initConnection();
                 this.sc.setExtend("");
                 //set make request
                 this.sc.connectGet();
@@ -65,36 +88,17 @@ public class MainActivity extends Activity {
                 this.response = this.sc.getResponseStringBuffer().toString();
                 //here generic response
                 this.genericData = response;
-                Log.i("testResponse","get "+  response);
             }
         };
-        rt.setOnSuccess(new OnSuccess() {
-            @Override
-            public void success(Object o, String response) {
-                //success happens on http status 200 and no exception in executeInBackground
-            }
-        });
-        rt.setOnFailure(new OnFailure() {
-            @Override
-            public void onFinish(RestConnection sc, Exception e, String exceptionError, String response) {
 
-            }
-        });
-        rt.setOnFinishTask(new OnFinishTask2() {
-            @Override
-            public void onFinish(RestConnection sc, Exception e, String exceptionError, Object o, String response) {
-
-            }
-        });
-        rt.execute();
     }
 
-    void examplePostForm() {
-        RestTask<String> rt = new RestTask<String>(this) {
+    RestTask examplePostForm() {
+        return new RestTask<String>(MainActivity.this) {
             @Override
             public void executeInBackGround(Context context) throws IllegalArgumentException, IOException, URISyntaxException, JSONException {
                 //set the rest connection
-                this.sc = MainActivity.this.initConnection();
+                this.sc = MainActivity.initConnection();
                 this.sc.setExtend("");
                 //set make request
                 this.sc.addUrlParameters("param","value");
@@ -104,36 +108,17 @@ public class MainActivity extends Activity {
                 this.response = this.sc.getResponseStringBuffer().toString();
                 //here generic response
                 this.genericData = response;
-                Log.i("testResponse","get "+  response);
+
             }
         };
-        rt.setOnSuccess(new OnSuccess() {
-            @Override
-            public void success(Object o, String response) {
-                //success happens on http status 200 and no exception in executeInBackground
-            }
-        });
-        rt.setOnFailure(new OnFailure() {
-            @Override
-            public void onFinish(RestConnection sc, Exception e, String exceptionError, String response) {
-
-            }
-        });
-        rt.setOnFinishTask(new OnFinishTask2() {
-            @Override
-            public void onFinish(RestConnection sc, Exception e, String exceptionError, Object o, String response) {
-
-            }
-        });
-        rt.execute();
     }
 
-    void examplePostPayload() {
-        RestTask<String> rt = new RestTask<String>(this) {
+    RestTask examplePostPayload() {
+        return new RestTask<String>(MainActivity.this) {
             @Override
             public void executeInBackGround(Context context) throws IllegalArgumentException, IOException, URISyntaxException, JSONException {
                 //set the rest connection
-                this.sc = MainActivity.this.initConnection();
+                this.sc = MainActivity.initConnection();
                 this.sc.setExtend("");
                 //set make request
                 this.sc.connectPost("{\"param\":\"value\"}");
@@ -144,33 +129,14 @@ public class MainActivity extends Activity {
                 Log.i("testResponse","post "+  response);
             }
         };
-        rt.setOnSuccess(new OnSuccess() {
-            @Override
-            public void success(Object o, String response) {
-                //success happens on http status 200 and no exception in executeInBackground
-            }
-        });
-        rt.setOnFailure(new OnFailure() {
-            @Override
-            public void onFinish(RestConnection sc, Exception e, String exceptionError, String response) {
-
-            }
-        });
-        rt.setOnFinishTask(new OnFinishTask2() {
-            @Override
-            public void onFinish(RestConnection sc, Exception e, String exceptionError, Object o, String response) {
-
-            }
-        });
-        rt.execute();
     }
 
-    void exampleDelete() {
-        RestTask<String> rt = new RestTask<String>(this) {
+    RestTask exampleDelete() {
+        return new RestTask<String>(MainActivity.this) {
             @Override
             public void executeInBackGround(Context context) throws IllegalArgumentException, IOException, URISyntaxException, JSONException {
                 //set the rest connection
-                this.sc = MainActivity.this.initConnection();
+                this.sc = MainActivity.initConnection();
                 this.sc.setExtend("");
                 //set make request
                 this.sc.connectDelete("");
@@ -180,15 +146,6 @@ public class MainActivity extends Activity {
                 this.genericData = response;
             }
         };
-        rt.setOnSuccess(new OnSuccess() {
-            @Override
-            public void success(Object o, String response) {
-                //success happens on http status 200 and no exception in executeInBackground
-                Log.i("testResponse", "post " + response);
-            }
-        });
-
-        rt.execute();
     }
 
     void examplePut() {

@@ -31,3 +31,6 @@ sc.addHeader("platform", "android");</br>
 sc.connectPost("{"jsonParam":"json value"}");</br>
 // get the response</br>
 InputStream response = sc.getResponseStream()</br>
+
+<a href="secretescapes://open/"> test open </>
+<a href="secretescapes://open/1234"> test open </>

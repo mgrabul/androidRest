@@ -33,5 +33,3 @@ sc.connectPost("{"jsonParam":"json value"}");</br>
 InputStream response = sc.getResponseStream()</br>
 
 
-<a href="secretescapes://open/">open/</a>
-<a href="secretescapes://open/1234"/>open/1234</a>

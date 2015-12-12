@@ -84,7 +84,7 @@ sc.connectPost("{"jsonParam":"json value"}");</br>
 //get the response</br>
 String response  = sc.getResponseStream().toString();
 </br></br>
-//Abord connection</br>
+//Abort connection</br>
 RestConnection sc = new RestConnection();</br>
 //sets base url</br>
 sc.setBaseUrl("http://ip.jsontest.com");</br>

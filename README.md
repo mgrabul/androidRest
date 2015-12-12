@@ -15,7 +15,7 @@ Library for HTTP connection
 <li>get status code</li>
 <li>return the body as ResponseStringBuffer or InputStream</li>
 <li>set headers</li>
-<li>get status code,</li>
+<li>get status code</li>
 <li>Option to make server calls in a new theread</li>
 <!---
 It contains a RestTask class that is a task that extends from AsyncTask and is used to support the calls in a new thread.
@@ -93,8 +93,22 @@ sc.setExtend("/test");</br>
 sc.connectPost("{"jsonParam":"json value"}");</br>
 //abort connnection</br>
 sc.abortConnection();
-
-
+<br></br>
+//set headers
+</br>
+RestConnection sc = new RestConnection();</br>
+//add headers</br>
+sc.addHeader("header_name","header_value");
+<br></br>
+//get status code
+RestConnection sc = new RestConnection();</br>
+//sets base url</br>
+sc.setBaseUrl("http://ip.jsontest.com");</br>
+//set extend on the url</br>
+sc.setExtend("/test")</br>
+sc.connectGet();</br>
+//get status code after calling one of the connect methods</br>
+sc.getStatusCode();</br>
 
 
 

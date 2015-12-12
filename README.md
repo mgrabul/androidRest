@@ -14,8 +14,6 @@ Library for HTTP connection
 <li>set headers</li>
 <li>get status code</li>
 <li>return the body as ResponseStringBuffer or InputStream</li>
-<li>set headers</li>
-<li>get status code</li>
 <li>Option to make server calls in a new theread</li>
 <!---
 It contains a RestTask class that is a task that extends from AsyncTask and is used to support the calls in a new thread.
@@ -41,7 +39,7 @@ sc.setBaseUrl("http://ip.jsontest.com");</br>
 sc.setExtend("/test")</br>
 sc.connectPost("{"jsonParam":"json value"}");</br>
 // get the response</br>
-String response  = sc.getResponseStream().toString();
+String response  = sc.getResponseStringBuffer().toString();
 <!--InputStream response = sc.getResponseStream()</br>-->
 </br></br>
 Simple Put example</br>
@@ -72,7 +70,7 @@ sc.addPayloadParameters("age", "20");</br>
 // add empty string in the connectPost method to send a http form</br>
 sc.connectPost("");</br>
 //get the response</br>
-String response  = sc.getResponseStream().toString();
+String response  = sc.getResponseStringBuffer().toString();
 </br></br>
 //Json body request</br>
 RestConnection sc = new RestConnection();</br>
@@ -82,7 +80,7 @@ sc.setExtend("/test");</br>
 // json string is send in the connection mettod</br>
 sc.connectPost("{"jsonParam":"json value"}");</br>
 //get the response</br>
-String response  = sc.getResponseStream().toString();
+String response  = sc.getResponseStringBuffer().toString();
 </br></br>
 //Abort connection</br>
 RestConnection sc = new RestConnection();</br>
@@ -108,7 +106,18 @@ sc.setBaseUrl("http://ip.jsontest.com");</br>
 sc.setExtend("/test")</br>
 sc.connectGet();</br>
 //get status code after calling one of the connect methods</br>
-sc.getStatusCode();</br>
+sc.getStatusCode();</br></br>
+
+return the body as ResponseStringBuffer or InputStream</br>
+RestConnection sc = new RestConnection();</br>
+//sets base url</br>
+sc.setBaseUrl("http://ip.jsontest.com");</br>
+sc.connectGet();</br>
+InputStream response  = sc.getResponseStream();</br>
+//or</br>
+StringBuffer response  = sc.getResponseStringBuffer();</br>
+
+
 
 
 

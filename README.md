@@ -2,7 +2,7 @@
 Library for HTTP connection
 <h2>features</h2>
 <ul>
-<li>HTTP GET</li> 
+<li>GET</li> 
 <li>POST</li> 
 <li>PUT</li> 
 <li>DELETE</li> 
@@ -23,30 +23,54 @@ The RestTask has interfaces for a onSuccess, onFailure and onFinish interfaces t
 -->
 </ul>
 </br></br>
+Simple example GET example:</br>
+RestConnection sc = new RestConnection();</br>
+//sets base url</br>
+sc.setBaseUrl("http://ip.jsontest.com");</br>
+//set extend on the url</br>
+sc.setExtend("/test")</br>
+sc.connectGet();</br>
+// get the response</br>
+String response = sc.getResponseStringBuffer().toString()</br>
+</br></br>
+Simple POST payload example with json body: </br>
+RestConnection sc = new RestConnection();</br>
+//sets base url</br>
+sc.setBaseUrl("http://ip.jsontest.com");</br>
+//set extend on the url</br>
+sc.setExtend("/test")</br>
+sc.connectPost("{"jsonParam":"json value"}");</br>
+// get the response</br>
+String response  = sc.getResponseStream().toString();
+<!--InputStream response = sc.getResponseStream()</br>-->
+</br></br>
+Simple Put example</br>
 Simple example get example:</br>
 RestConnection sc = new RestConnection();</br>
 //sets base url</br>
 sc.setBaseUrl("http://ip.jsontest.com");</br>
 //set extend on the url</br>
 sc.setExtend("/test")</br>
-//set header</br>
-sc.addHeader("platform", "android");</br>
-// support for gzip</br>
-sc.connectGet();</br>
+sc.connectPut("{"jsonParam":"json value"}");</br>
 // get the response</br>
-String response = sc.getResponseStringBuffer().toString()</br>
-</br></br>
-Simple post payload example: </br>
+String response = sc.getResponseStringBuffer().toString()</br></br>
+Simple DELETE example: </br>
 RestConnection sc = new RestConnection();</br>
 //sets base url</br>
 sc.setBaseUrl("http://ip.jsontest.com");</br>
-//set extend on the url</br>
-sc.setExtend("/test")</br>
-//set header</br>
-sc.addHeader("platform", "android");</br>
-// support for gzip</br>
-sc.connectPost("{"jsonParam":"json value"}");</br>
-// get the response</br>
-InputStream response = sc.getResponseStream()</br>
+sc.addPayloadParameters("id", "23");
+sc.connectDelete("");
+<br></br>
+RestConnection sc = new RestConnection();</br>
+//sets base url</br>
+sc.setBaseUrl("http://ip.jsontest.com");</br>
+sc.setExtend("/test");</br>
+//Add form's key value elements</br>
+sc.addPayloadParameters("id", "7");</br>
+sc.addPayloadParameters("age", "20");</br>
+// add empty string in the connectPost method to send a http form</br>
+sc.connectPost("");</br>
+//get the response</br>
+String response  = sc.getResponseStream().toString();
 
 

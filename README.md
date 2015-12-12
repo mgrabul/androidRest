@@ -10,7 +10,7 @@ Library for HTTP connection
 <li>payload requests</li> 
 <li>supports gzip</li> 
 <li>set connection timeout</li>
-<li>kill connection,abord connection</li>
+<li>kill connection,abort connection</li>
 <li>set headers</li>
 <li>get status code</li>
 <li>return the body as ResponseStringBuffer or InputStream</li>
@@ -83,6 +83,17 @@ sc.setExtend("/test");</br>
 sc.connectPost("{"jsonParam":"json value"}");</br>
 //get the response</br>
 String response  = sc.getResponseStream().toString();
+</br></br>
+//Abord connection</br>
+RestConnection sc = new RestConnection();</br>
+//sets base url</br>
+sc.setBaseUrl("http://ip.jsontest.com");</br>
+sc.setExtend("/test");</br>
+// json string is send in the connection mettod</br>
+sc.connectPost("{"jsonParam":"json value"}");</br>
+//abort connnection</br>
+sc.abortConnection();
+
 
 
 

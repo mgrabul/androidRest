@@ -61,6 +61,7 @@ sc.setBaseUrl("http://ip.jsontest.com");</br>
 sc.addPayloadParameters("id", "23");
 sc.connectDelete("");
 <br></br>
+//Form request</br>
 RestConnection sc = new RestConnection();</br>
 //sets base url</br>
 sc.setBaseUrl("http://ip.jsontest.com");</br>

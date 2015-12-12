@@ -73,5 +73,17 @@ sc.addPayloadParameters("age", "20");</br>
 sc.connectPost("");</br>
 //get the response</br>
 String response  = sc.getResponseStream().toString();
+</br></br>
+//Json body request</br>
+RestConnection sc = new RestConnection();</br>
+//sets base url</br>
+sc.setBaseUrl("http://ip.jsontest.com");</br>
+sc.setExtend("/test");</br>
+// json string is send in the connection mettod</br>
+sc.connectPost("{"jsonParam":"json value"}");</br>
+//get the response</br>
+String response  = sc.getResponseStream().toString();
+
+
 
 

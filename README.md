@@ -117,7 +117,11 @@ InputStream response  = sc.getResponseStream();</br>
 //or</br>
 StringBuffer response  = sc.getResponseStringBuffer();</br>
 
-
-
+<h2>RestTask</h2>
+It allows you to make a call in a new thread, This class is based/extens from the androids AsyncTask, but unlike the android  AsyncTask that is a general all purpuse thread, the RestTask it is made to handle HTTP connections. It has the folowing life cycle:
+startProgress() method is executed in the threadd the started the new RestTask, and it is the first method that is owned byt he assyng task.
+executeInBackGround(Context context) is the method that is executed in a new thread, the main method the class is designed to extend this method and perform the heavy and time consunimng operations here, that is retriving the data from a http/https conection,parse this data, save to db.
+onSuccess.success(GenericData genericData, String response), it is an interface that is trigered when no error has happened in the executeInBackGround(no http error, no parsing error, no persisging error).
+OnFailure.onFinish(RestConnection sc, Exception e, String exceptionError, String response), it is an interface when some error hapened in the executeInBackGround(Context context), the interfaces methode is wery conviniend and provides you, the RestConnnection object, the Exception, the string response
 
 

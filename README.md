@@ -128,7 +128,55 @@ It allows you to make a call in a new thread, This class is based/extens from th
 <li>OnFinishTask2.onFinish(RestConnection sc, Exception e, String exceptionError,
 						 GenericData genericData, String response),it is the last method in the lifecycle, returns executes in any case when the backround thread is over, this can be used if you want to handle boath methods OnFailure.onFinish and  onSuccess.success the same or want to know when this are over.</li>
 </ul>
+<br/> <br/>
+Example:<br/>
+//create a rest task by extending or rewritint the on execute in background, </br>the generic in the RestTask<String> is the object you want the server to return, in most of the cases this will be a model, </br>or list of models and not a strung </br>
+ 
+    RestTask exampleGet() { 
+        return new RestTask<String>(MainActivity.this) {
+            @Override 
+            public void executeInBackGround(Context context) throws IllegalArgumentException, IOException, URISyntaxException, JSONException {
+                //set the rest connection 
+                this.sc = MainActivity.initConnection();
+                this.sc.setExtend("");
+                //set make request 
+                this.sc.connectGet();
+                //set response 
+                this.response = this.sc.getResponseStringBuffer().toString();
+                //here generic response 
+                this.genericData = response;
+            } 
+        }; 
+ 
+ 
+    } 
+// create new task</br>
 
-
-
+        //start a call 
+        RestTask<String> rt = exampleGet();
+ 
+ 
+        rt.setOnSuccess(new OnSuccess<String>() {
+            @Override 
+            public void success(String o, String response) {
+                //success happens on http status 200 and no exception in executeInBackground 
+                Log.i("testResponse","response "+  response);
+            } 
+        }); 
+        rt.setOnFailure(new OnFailure() {
+            @Override 
+            public void onFinish(RestConnection sc, Exception e, String exceptionError, String response) {
+ 
+ 
+            } 
+        }); 
+        rt.setOnFinishTask(new OnFinishTask2<String>() {
+            @Override 
+            public void onFinish(RestConnection sc, Exception e, String exceptionError, String o, String response) {
+ 
+ 
+            } 
+        }); 
+        rt.execute();
+    } 
 
